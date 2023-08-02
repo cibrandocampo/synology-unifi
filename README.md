@@ -1,8 +1,4 @@
-# synology-unifi
-Unifi controller runing over Synology Containers
-
-
-# Unifi Controller on Synology with using Container manager(Docker Compose)
+# Unifi Controller on Synology with using Container manager (Docker Compose)
 
 This repository contains a Docker Compose file to run the Unifi Controller on a Synology using the container management application. The Unifi Controller is a management and control platform for Ubiquiti network devices.
 
@@ -33,9 +29,9 @@ If you need to modify the configuration of the Unifi Controller, you can edit th
 
 8. Click "Apply" to start the deployment of the Unifi Controller container based on the provided settings.
 
-9. Once the container is deployed, access the Unifi Controller through your web browser: http://SYNOLOGY_IP:8080
+9. Once the container is deployed, access the Unifi Controller through your web browser: http://SYNOLOGY_IP:9001
 
-Replace `SYNOLOGY_IP` with the local IP address of your Synology.
+Replace `SYNOLOGY_IP` with the local IP address of your Synology, and use the port configure in the `.env` file.
 
 10. Follow the initial setup steps of the Unifi Controller to complete the installation.
 
