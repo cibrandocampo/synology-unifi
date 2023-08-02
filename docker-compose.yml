@@ -1,0 +1,65 @@
+version: "3"
+services:
+  mongo:
+    image: mongo:${MONGO_VERSION:-latest}
+    container_name: ${COMPOSE_PROJECT_NAME}_unifi_mongo
+    networks:
+      - unifi
+    restart: always
+    volumes:
+      - unifi-db-data:/data/db
+      - unifi-db-config:/data/configdb
+
+  controller:
+    image: jacobalberty/unifi:${UNIFI_VERSION:-latest}
+    container_name: ${COMPOSE_PROJECT_NAME}_unifi_controller
+    depends_on:
+      - mongo
+    init: true
+    networks:
+      - unifi
+    restart: always
+    volumes:
+      - unifi-data:/unifi
+    user: unifi
+    environment:
+      DB_URI: mongodb://mongo/unifi
+      STATDB_URI: mongodb://mongo/unifi_stat
+      DB_NAME: unifi
+      UNIFI_HTTP_PORT: "${UNIFI_HTTP_PORT:-8880}"
+      UNIFI_HTTPS_PORT: "${UNIFI_HTTPS_PORT:-8843}"
+      TZ: "${TZ:-UTC}"
+    ports:
+      - "3478:3478/udp" # Used for STUN
+      - "5514:5514/udp" # Used for remote syslog capture
+      - "6789:6789/tcp" # Used for UniFi mobile speed test
+      - "8080:8080/tcp" # Used for device and application communication
+      - "${UNIFI_HTTP_PORT:-8880}:${UNIFI_HTTP_PORT:-8880}/tcp" # Used for HTTP portal
+      - "${UNIFI_HTTPS_PORT:-8843}:${UNIFI_HTTPS_PORT:-8843}/tcp" # Used for HTTPS portal
+      - "10001:10001/udp" # Used for device discovery
+
+volumes:
+  unifi-db-data:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "${UNIFI_DB_DATA_VOLUME_PATH}"
+
+  unifi-db-config:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "${UNIFI_DB_CONFIG_VOLUME_PATH}"
+
+  unifi-data:
+    driver: local
+    driver_opts:
+      type: "none"
+      o: "bind"
+      device: "${UNIFI_VOLUME_PATH}"
+
+networks:
+  unifi: 
+    driver: bridge
