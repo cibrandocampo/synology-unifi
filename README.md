@@ -1,45 +1,52 @@
-# Unifi Controller on Synology with using Container manager (Docker Compose)
+# UniFi Controller on Synology using Container Manager (Docker Compose)
 
-This repository contains a Docker Compose file to run the Unifi Controller on a Synology using the container management application. The Unifi Controller is a management and control platform for Ubiquiti network devices.
+This repository contains a Docker Compose configuration for running the UniFi Controller on a Synology NAS using the Container Manager application. The UniFi Controller is a powerful management and control platform for Ubiquiti network devices.
 
 ## Prerequisites
 
-- A Synology NAS with DSM > 7.0 installed and properly configured.
-- The Synology Container Manager application installed and running.
+Before proceeding, ensure that you have the following:  
 
-## Configuration/Customization
+- A Synology NAS with DSM 7.0 or later, properly configured.  
+- The **Container Manager** application installed and running.  
 
-If you need to modify the configuration of the Unifi Controller, you can edit the `.env` file you copied to the NAS before importing the project into the Container Manager. This allows you to customize the container's behavior according to your specific requirements.
+## Configuration & Customization
+
+To customize the UniFi Controller settings, edit the `.env` file before importing the project into Container Manager. This allows you to configure environment variables, ports, and other parameters to match your specific requirements.  
 
 ## Installation
 
-1. Copy the `docker-compose.yml` and `.env` files to a folder on your Synology NAS. You can do this using the command line, file manager, or any other preferred method.
+Follow these steps to deploy the UniFi Controller using Docker Compose:  
 
-2. Open the Synology Container Manager application from the DSM desktop.
+1. Copy the `docker-compose.yml` and `.env` files to a folder on your Synology NAS.  
+   - You can transfer these files via SSH, the file manager, or any preferred method.  
 
-3. In the Container Manager, click on "Import" to create a new project from your Docker Compose files.
+2. Open the **Container Manager** application from the DSM web interface.  
 
-4. Browse to the folder where you copied the `docker-compose.yml` and `.env` files.
+3. Click **"Import"** to create a new project using Docker Compose.  
 
-5. Select the `docker-compose.yml` file and click "Next."
+4. Navigate to the folder where you copied the `docker-compose.yml` and `.env` files.  
 
-6. The Container Manager will automatically detect the `.env` file associated with the Docker Compose and load the environment variables.
+5. Select the `docker-compose.yml` file and click **"Next"**.  
 
-7. Review the settings and configurations imported from the `docker-compose.yml` and `.env` files. Make any necessary adjustments if needed.
+6. Container Manager will automatically detect and load the `.env` file, applying the environment variables.  
 
-8. Click "Apply" to start the deployment of the Unifi Controller container based on the provided settings.
+7. Review the imported settings and make any necessary adjustments.  
 
-9. Once the container is deployed, access the Unifi Controller through your web browser: http://SYNOLOGY_IP:9001
+8. Click **"Apply"** to start the deployment of the UniFi Controller container.  
 
-Replace `SYNOLOGY_IP` with the local IP address of your Synology, and use the port configure in the `.env` file.
+9. Once deployed, access the UniFi Controller web interface by opening a browser and visiting:  
+   ```
+   http://SYNOLOGY_IP:9001
+   ```
+   Replace `SYNOLOGY_IP` with the local IP address of your Synology NAS. The port is configurable in the `.env` file.  
 
-10. Follow the initial setup steps of the Unifi Controller to complete the installation.
+10. Follow the UniFi Controller setup wizard to complete the installation.  
 
+## Troubleshooting & Contributions
 
-## Issues and Contributions
-
-If you encounter any problems or have any suggestions, feel free to contact me via (hello@cibran.es). You can also contribute to improving this project by submitting pull requests.
+If you encounter any issues or have suggestions for improvements, feel free to contact me at **[hello@cibran.es](mailto:hello@cibran.es)**.  
+You can also contribute to this project by submitting pull requests.  
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).  
